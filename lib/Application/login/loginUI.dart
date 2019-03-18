@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+
+var userName;
+var userPwd;
 
 class LoginView extends StatefulWidget{
-  final String userName = '';
-  final String userPwd = '';
   LoginView({Key key}) : super(key: key);
 
   @override
@@ -81,10 +83,12 @@ class _LoginViewState extends State<LoginView>
     print('点击了立即进入');
   }
   void _userNameChanged(String str) {
-    print(str);
+    userName = str;
+    print('userName : '+userName);
   }
   void _userPwdChanged(String str) {
-    print(str);
+    userPwd = str;
+    print('userPwd : '+userPwd);
   }
 }
 
