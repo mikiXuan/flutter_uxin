@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 var userName;
 var userPwd;
@@ -81,6 +83,13 @@ class _LoginViewState extends State<LoginView>
 
   void login() async {
     print('点击了立即进入');
+
+    Response response;
+    Dio dio = new Dio();
+
+    response = await dio.get("http://www.czbanbantong.com/get_yx_url.php");
+    print(response.data.toString());
+
   }
   void _userNameChanged(String str) {
     userName = str;
