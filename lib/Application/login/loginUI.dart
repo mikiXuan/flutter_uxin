@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
-import 'package:crypto/crypto.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_uxin/Application/mainTableBar/mainTableBar.dart';
 
 var userName;
 var userPwd;
@@ -19,7 +20,14 @@ class _LoginViewState extends State<LoginView>
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-      appBar: null,
+      appBar: new AppBar(
+        leading: new Icon(Icons.add),
+        title: new Text('登陆',
+            style: new TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.blue,
+      ),
       body:GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: (){
@@ -84,13 +92,37 @@ class _LoginViewState extends State<LoginView>
   void login() async {
     print('点击了立即进入');
 
+
+    Navigator.push(context,
+        new MaterialPageRoute(
+            builder: (content) => new mainTableBar()
+        )
+    );
+
+
     Response response;
     Dio dio = new Dio();
 
     response = await dio.get("http://www.czbanbantong.com/get_yx_url.php");
-    print(response.data.toString());
+//    print(response.data.toString());
+
+    List list = json.decode(response.toString());
+//    Map map = list[2];
+
+    _incrementCounter(response.toString());
+
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print('get + ' + prefs.get('cacheValue'));
+
 
   }
+
+  _incrementCounter(var cacheValue) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('cacheValue', cacheValue);
+  }
+
   void _userNameChanged(String str) {
     userName = str;
     print('userName : '+userName);
