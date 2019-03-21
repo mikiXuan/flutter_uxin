@@ -3,6 +3,9 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_uxin/Application/mainTableBar/mainTableBar.dart';
+import 'package:flutter_uxin/Application/mainView/MainFirstView.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 
 var userName;
 var userPwd;
@@ -93,20 +96,27 @@ class _LoginViewState extends State<LoginView>
     print('点击了立即进入');
 
 
+    final store = new Store<int>(counterReducer, initialState: 0);
+
+
     Navigator.push(context,
         new MaterialPageRoute(
-            builder: (content) => new mainTableBar()
+            builder: (content) => new FlutterReduxApp(
+              title: 'Flutter Redux Demo',
+              store: store,
+            )
         )
     );
 
 
+    /*
     Response response;
     Dio dio = new Dio();
 
     response = await dio.get("http://www.czbanbantong.com/get_yx_url.php");
 //    print(response.data.toString());
 
-    List list = json.decode(response.toString());
+//    List list = json.decode(response.toString());
 //    Map map = list[2];
 
     _incrementCounter(response.toString());
@@ -114,7 +124,7 @@ class _LoginViewState extends State<LoginView>
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print('get + ' + prefs.get('cacheValue'));
-
+*/
 
   }
 

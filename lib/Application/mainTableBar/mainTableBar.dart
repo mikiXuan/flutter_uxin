@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-class mainTableBar extends StatelessWidget {
+class MainTleBar extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,4 +14,18 @@ class mainTableBar extends StatelessWidget {
       ),
     );
   }
+}
+
+class MainInfo {
+  final String txt ;
+  final bool bl ;
+
+  MainInfo({
+    this.txt,
+    this.bl,
+  });
+
+  factory MainInfo.initial() => new MainInfo(txt : "Love");
+  factory MainInfo.loading() => new MainInfo(bl: false);
+
 }
