@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_uxin/Application/mainTableBar/mainTableBar.dart';
-
+import '../Routers/applicaiton.dart';
 
 var userName;
 var userPwd;
@@ -74,12 +73,12 @@ class _LoginViewState extends State<LoginView>
 
   void login() async {
     print('点击了立即进入');
-
-    Navigator.push(context,
-        new CupertinoPageRoute(
-            builder: (content) => new MainTleBar()
-        )
-    );
+//    Navigator.push(context,
+//        new CupertinoPageRoute(
+//            builder: (content) => new MainTleBar()
+//        )
+//    );
+  Application.router.navigateTo(context, "/navigationTabBar");
   }
 
   void _userNameChanged(String str) {
